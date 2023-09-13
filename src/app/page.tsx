@@ -10,17 +10,20 @@ import Button from '@mui/material/Button'
 
 const Home: FC = () => {
     const { getRealTimeFlightData, data } = logic()
-    const [intervalTime, setIntervalTime] = useState(10000)
+    const [intervalTime, setIntervalTime] = useState(3000)
+    const [selectedButton, setSelectedButton] = useState(0)
 
     useEffect(() => {
         getRealTimeFlightData()
+        setSelectedButton(0)
     }, [])
 
     useInterval(() => {
         getRealTimeFlightData()
     }, intervalTime)
 
-    const handleIntervalChange = (newInterval: number) => {
+    const handleIntervalChange = (newInterval: number, index: number) => {
+        setSelectedButton(index)
         setIntervalTime(newInterval)
     }
 
@@ -30,35 +33,39 @@ const Home: FC = () => {
                 <Header />
                 <ButtonContainer>
                     <Button
+
                         sx={{
                             margin: 1,
-                            backgroundColor: '#f1c933',
-                            color: '#2091eb',
+                            backgroundColor: selectedButton === 0 ? '#2091eb' : '#f1c933',
+                            color: selectedButton === 0 ? '#f1c933' : '#2091eb',
                         }}
                         variant="contained"
-                        onClick={() => handleIntervalChange(3000)}
+                        onClick={() => handleIntervalChange(3000, 0)}
                     >
                         Intervalo 3 segundos
                     </Button>
                     <Button
+                        tabIndex={1}
                         sx={{
                             margin: 1,
-                            backgroundColor: '#f1c933',
-                            color: '#2091eb',
+                            backgroundColor: selectedButton === 1 ? '#2091eb' : '#f1c933',
+                            color: selectedButton === 1 ? '#f1c933' : '#2091eb',
+
                         }}
                         variant="contained"
-                        onClick={() => handleIntervalChange(6000)}
+                        onClick={() => handleIntervalChange(6000, 1)}
                     >
                         Intervalo 6 segundos
                     </Button>
                     <Button
+                        tabIndex={2}
                         sx={{
                             margin: 1,
-                            backgroundColor: '#f1c933',
-                            color: '#2091eb',
+                            backgroundColor: selectedButton === 2 ? '#2091eb' : '#f1c933',
+                            color: selectedButton === 2 ? '#f1c933' : '#2091eb',
                         }}
                         variant="contained"
-                        onClick={() => handleIntervalChange(10000)}
+                        onClick={() => handleIntervalChange(10000, 2)}
                     >
                         Intervalo 10 segundos
                     </Button>
