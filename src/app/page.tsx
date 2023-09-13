@@ -1,11 +1,12 @@
 'use client'
 
-import { FC, useEffect, memo } from 'react'
+import { FC, useEffect, memo, useState } from 'react'
 import logic from './logic'
 import * as React from 'react'
 import { MainContainer } from './componets/Header/styles'
 import TableFilterComponent from './componets/Filter'
 import Header from './componets/Header'
+import ButtonComponent from './componets/Button'
 
 // const SearchFilterComponent: FC<TokenData> = ({ token, user, price, size, timeTrade, buysell }) => {
 //     const [searchText, setSearchText] = useState('')
@@ -59,15 +60,34 @@ import Header from './componets/Header'
 
 const Home: FC = () => {
     const { getRealTimeFlightData, data } = logic()
+    const [activateRealTime, setActivateRealTime] = useState(false)
     console.log(data)
 
     useEffect(() => {
         getRealTimeFlightData()
     }, [])
 
+    useEffect(() => {
+        if (activateRealTime) {
+            const interval = setInterval(() => {
+                getRealTimeFlightData()
+            }, 1000)
+
+            return () => {
+                clearInterval(interval)
+            }
+        }
+    }, [activateRealTime])
+
     return (
         <MainContainer>
             <Header />
+            <ButtonComponent
+                title="Get Real Time Data"
+                onClick={() => {
+                    setActivateRealTime(!activateRealTime) // Invertir el estado
+                }}
+            />
 
             <TableFilterComponent tokenData={data} />
         </MainContainer>

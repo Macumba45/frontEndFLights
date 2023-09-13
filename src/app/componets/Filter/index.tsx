@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField'
 import { TokenData } from '@/app/types'
 import { MainContainer } from './styles'
 import BasicTable from '../TableFlights'
-
+import ButtonComponent from '../Button'
 const TableFilterComponent: FC<{ tokenData: TokenData[] }> = ({
     tokenData,
 }) => {
@@ -22,20 +22,23 @@ const TableFilterComponent: FC<{ tokenData: TokenData[] }> = ({
     }
 
     return (
-        <MainContainer>
-            <TextField
-                label="Search by UUID OR Buy/Sell"
-                variant="outlined"
-                autoComplete="off"
-                fullWidth
-                value={searchText}
-                onChange={handleSearchChange}
-                sx={{ mb: '3rem' }}
-                disabled={tokenData.length === 0}
-            />
-
-            <BasicTable tokenData={filteredTokens} />
-        </MainContainer>
+        <>
+            <MainContainer>
+                <TextField
+                    label="Search by UUID OR Buy/Sell"
+                    variant="outlined"
+                    autoComplete="off"
+                    fullWidth
+                    value={searchText}
+                    onChange={handleSearchChange}
+                    sx={{ mb: '3rem' }}
+                    disabled={tokenData.length === 0}
+                />
+            </MainContainer>
+            <div>
+                <BasicTable tokenData={filteredTokens} />
+            </div>
+        </>
     )
 }
 
