@@ -38,7 +38,9 @@ const TableFilterComponent: FC<{ tokenData: Binance[] }> = ({ tokenData }) => {
                     sx={{ width: '100%' }}
                 />
             </MainContainer>
-            <div style={{ overflow: 'scroll', width: '100%', maxWidth: '700px' }}>
+            <div
+                style={{ overflow: 'scroll', width: '100%', maxWidth: '700px' }}
+            >
                 <BasicTable tokenData={filteredTokens} />
             </div>
         </>

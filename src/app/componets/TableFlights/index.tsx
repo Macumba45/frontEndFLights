@@ -15,6 +15,7 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn'
 import EqualizerIcon from '@mui/icons-material/Equalizer'
 import PriceChangeIcon from '@mui/icons-material/PriceChange'
+import CircleNotificationsRoundedIcon from '@mui/icons-material/CircleNotificationsRounded'
 
 const GreenTableCell = styled(TableCell)`
     color: green;
@@ -42,6 +43,19 @@ const BasicTable: FC<PropsToken> = (props: PropsToken) => {
     const [changes, setChanges] = useState<{
         [key: string]: { volumen24h: number; marketCap: number; price: number }
     }>({})
+    const [isModalOpen, setIsModalOpen] = useState(true)
+    const [buttonModal, setButtonModal] = useState(false)
+
+    const handleOpenButton = () => {
+        setButtonModal(true)
+        setIsModalOpen(false)
+    }
+
+    const handleOpenNotification = () => {
+        setIsModalOpen(true)
+        setButtonModal(false)
+    }
+
     useEffect(() => {
         const newData: {
             [key: string]: {
@@ -125,59 +139,79 @@ const BasicTable: FC<PropsToken> = (props: PropsToken) => {
 
     return (
         <>
-            <Modal
-                style={{ marginBottom: '2rem', outline: 'none', width: 400 }}
-                open={Object.keys(changes).length > 0}
-            >
-                <Paper
-                    sx={{
-                        p: 2,
-                        position: 'absolute',
-                        top: '50%',
-                        left: '50%',
-                        transform: 'translate(-50%, -50%)',
-                        overflow: 'scroll', // Agrega el scroll al modal
+            {buttonModal && (
+                <Button onClick={() => handleOpenNotification()}>
+                    <CircleNotificationsRoundedIcon
+                        sx={{
+                            fontSize: 60,
+                            position: 'fixed',
+                            bottom: 10,
+                            right: 20,
+                            backgroundColor: 'white',
+                            borderRadius: '50%',
+                        }}
+                    />
+                </Button>
+            )}
+            {isModalOpen && (
+                <Modal
+                    style={{
+                        marginBottom: '2rem',
                         outline: 'none',
-                        maxHeight: 600,
+                        width: 400,
                     }}
+                    open={Object.keys(changes).length > 0}
                 >
-                    {Object.keys(changes).map(coin => {
-                        const coinData: any = changes[coin]
-                        return (
-                            <Alert
-                                sx={{
-                                    outline: 'none',
-                                    margin: 2,
-                                    width: 200,
-                                    display: 'flex',
-                                }}
-                                key={coin}
-                                severity="success"
-                            >
-                                {coin} has changed:
-                                <ul style={{ overflow: 'scroll' }}>
-                                    {Object.keys(coinData).map(key => (
-                                        <li
-                                            style={{ fontSize: '0.8rem' }}
-                                            key={key}
-                                        >
-                                            {key}: {coinData[key]}
-                                        </li>
-                                    ))}
-                                </ul>
-                            </Alert>
-                        )
-                    })}
-                    <Button
-                        sx={{ outline: 'none' }}
-                        variant="contained"
-                        onClick={() => setChanges({})}
+                    <Paper
+                        sx={{
+                            p: 2,
+                            position: 'absolute',
+                            top: '50%',
+                            left: '50%',
+                            transform: 'translate(-50%, -50%)',
+                            overflow: 'scroll', // Agrega el scroll al modal
+                            outline: 'none',
+                            maxHeight: 600,
+                        }}
                     >
-                        Cerrar
-                    </Button>
-                </Paper>
-            </Modal>
+                        {Object.keys(changes).map(coin => {
+                            const coinData: any = changes[coin]
+                            return (
+                                <Alert
+                                    sx={{
+                                        outline: 'none',
+                                        margin: 2,
+                                        width: 200,
+                                        display: 'flex',
+                                    }}
+                                    key={coin}
+                                    severity="success"
+                                >
+                                    {coin} has changed:
+                                    <ul style={{ overflow: 'scroll' }}>
+                                        {Object.keys(coinData).map(key => (
+                                            <li
+                                                style={{ fontSize: '0.8rem' }}
+                                                key={key}
+                                            >
+                                                {key}: {coinData[key]}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </Alert>
+                            )
+                        })}
 
+                        <Button
+                            sx={{ outline: 'none' }}
+                            variant="contained"
+                            onClick={() => handleOpenButton()}
+                        >
+                            Cerrar
+                        </Button>
+                    </Paper>
+                </Modal>
+            )}
             <TableContainer component={Paper}>
                 <Table aria-label="simple table">
                     <TableHead>

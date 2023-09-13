@@ -33,10 +33,10 @@ const Home: FC = () => {
                 <Header />
                 <ButtonContainer>
                     <Button
-
                         sx={{
                             margin: 1,
-                            backgroundColor: selectedButton === 0 ? '#2091eb' : '#f1c933',
+                            backgroundColor:
+                                selectedButton === 0 ? '#2091eb' : '#f1c933',
                             color: selectedButton === 0 ? '#f1c933' : '#2091eb',
                         }}
                         variant="contained"
@@ -48,9 +48,9 @@ const Home: FC = () => {
                         tabIndex={1}
                         sx={{
                             margin: 1,
-                            backgroundColor: selectedButton === 1 ? '#2091eb' : '#f1c933',
+                            backgroundColor:
+                                selectedButton === 1 ? '#2091eb' : '#f1c933',
                             color: selectedButton === 1 ? '#f1c933' : '#2091eb',
-
                         }}
                         variant="contained"
                         onClick={() => handleIntervalChange(6000, 1)}
@@ -61,7 +61,8 @@ const Home: FC = () => {
                         tabIndex={2}
                         sx={{
                             margin: 1,
-                            backgroundColor: selectedButton === 2 ? '#2091eb' : '#f1c933',
+                            backgroundColor:
+                                selectedButton === 2 ? '#2091eb' : '#f1c933',
                             color: selectedButton === 2 ? '#f1c933' : '#2091eb',
                         }}
                         variant="contained"
