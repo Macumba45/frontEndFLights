@@ -6,15 +6,10 @@ import logic from '@/app/logic'
 
 const Header: FC = () => {
     const { data } = logic()
-    console.log(data.data)
 
     return (
         <MainContainer>
             <DatePickerComp />
-            <SearchFilterComponent
-                data={data.data}
-                pagination={data.pagination}
-            />
         </MainContainer>
     )
 }
