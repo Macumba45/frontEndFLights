@@ -1,11 +1,13 @@
 import { FC, memo } from 'react'
-import { MainContainer } from './styles'
-import logic from '@/app/logic'
+import { MainContainer, SubTitle, Title } from './styles'
 
 const Header: FC = () => {
-    const { data } = logic()
-
-    return <MainContainer></MainContainer>
+    return (
+        <MainContainer>
+            <Title>Token Tracker</Title>
+            <SubTitle>Check the status of the principal Tokens</SubTitle>
+        </MainContainer>
+    )
 }
 
 export default memo(Header)

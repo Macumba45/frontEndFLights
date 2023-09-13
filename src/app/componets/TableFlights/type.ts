@@ -1,4 +1,4 @@
-import { TokenData } from '@/app/types'
+import { Binance } from '@/app/types'
 export type PropsToken = {
-    tokenData: TokenData[]
+    tokenData: Binance[]
 }
