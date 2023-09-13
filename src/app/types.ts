@@ -85,10 +85,10 @@ export interface Live {
 }
 
 export type TokenData = {
-    user: string
-    token: string
-    price: number
-    timeTrade: string
-    size: number
-    buysell: string
+    uuid?: string
+    symbol_id?: string
+    price?: number
+    time_exchange?: string
+    size?: number
+    taker_side?: string
 }

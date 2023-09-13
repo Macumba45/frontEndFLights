@@ -1,47 +1,42 @@
 import React, { FC, useState } from 'react'
 import TextField from '@mui/material/TextField'
-import List from '@mui/material/List'
-import ListItem from '@mui/material/ListItem'
-import ListItemText from '@mui/material/ListItemText'
-import { Daum, FlightData } from '@/app/types'
+import { TokenData } from '@/app/types'
 import { MainContainer } from './styles'
+import BasicTable from '../TableFlights'
 
-const SearchFilterComponent: FC<FlightData> = ({ data }) => {
+const TableFilterComponent: FC<{ tokenData: TokenData[] }> = ({
+    tokenData,
+}) => {
     const [searchText, setSearchText] = useState('')
-    console.log(searchText)
-
-    const filteredData = data.filter(
-        (item: Daum) =>
-            // Comprueba si alguno de los campos contiene el texto de búsqueda
-            item.arrival?.airport?.includes(searchText.toLowerCase()) ||
-            item.flight?.number.includes(searchText.toLowerCase())
+    const filteredTokens = tokenData.filter(
+        token =>
+            token.uuid!.toLowerCase().includes(searchText.toLowerCase()) ||
+            token
+                .taker_side!.toLowerCase()
+                .includes(searchText.toLowerCase()) ||
+            token.symbol_id!.toLowerCase().includes(searchText.toLowerCase())
     )
 
-    const handleSearchChange = (event: any) => {
+    const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSearchText(event.target.value)
     }
 
     return (
         <MainContainer>
             <TextField
-                label="Search Flight Number or Airport"
+                label="Search by UUID OR Buy/Sell"
                 variant="outlined"
+                autoComplete="off"
                 fullWidth
                 value={searchText}
                 onChange={handleSearchChange}
+                sx={{ mb: '3rem' }}
+                disabled={tokenData.length === 0}
             />
-            <List>
-                {filteredData.map((item, index) => (
-                    <ListItem key={index}>
-                        <ListItemText
-                            primary={`Airport: ${item.arrival?.airport}, Flight Number: ${item.flight?.number}`}
-                            // Agrega más campos aquí según tus necesidades
-                        />
-                    </ListItem>
-                ))}
-            </List>
+
+            <BasicTable tokenData={filteredTokens} />
         </MainContainer>
     )
 }
 
-export default SearchFilterComponent
+export default TableFilterComponent

@@ -10,16 +10,18 @@ export const logic = () => {
     const getRealTimeFlightData = async (): Promise<void> => {
         try {
             const response = await axios.get(API_URL)
+            console.log(response)
             const rawData = response.data // Datos recibidos de la API
+            console.log(rawData)
 
             // Realizar la conversión de los datos a TokenData si es necesario
             const tokenDataArray: TokenData[] = rawData.map((item: any) => ({
-                user: item.user,
-                token: item.token,
+                uuid: item.uuid,
+                symbol_id: item.symbol_id,
                 price: item.price,
-                timeTrade: item.timeTrade,
+                time_exchange: item.time_exchange,
                 size: item.size,
-                buysell: item.buysell,
+                taker_side: item.taker_side,
             }))
 
             setData(tokenDataArray)

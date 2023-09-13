@@ -1,12 +1,11 @@
 'use client'
 
-import { FC, useEffect, memo, useState } from 'react'
+import { FC, useEffect, memo } from 'react'
 import logic from './logic'
-import BasicTable from './componets/TableFlights'
 import * as React from 'react'
-import { Daum, FlightData, TokenData } from '@/app/types'
-import { List, ListItem, ListItemText, TextField } from '@mui/material'
 import { MainContainer } from './componets/Header/styles'
+import TableFilterComponent from './componets/Filter'
+import Header from './componets/Header'
 
 // const SearchFilterComponent: FC<TokenData> = ({ token, user, price, size, timeTrade, buysell }) => {
 //     const [searchText, setSearchText] = useState('')
@@ -67,14 +66,11 @@ const Home: FC = () => {
     }, [])
 
     return (
-        <div>
-            <MainContainer>
-                {/* <SearchFilterComponent
-                    data={data.data}
-                /> */}
-            </MainContainer>
-            <BasicTable tokenData={data} />
-        </div>
+        <MainContainer>
+            <Header />
+
+            <TableFilterComponent tokenData={data} />
+        </MainContainer>
     )
 }
 

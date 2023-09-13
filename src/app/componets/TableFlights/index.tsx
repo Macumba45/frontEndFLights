@@ -14,44 +14,22 @@ const BasicTable: FC<PropsToken> = (props: PropsToken) => {
 
     return (
         <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 650, mt: '5rem' }} aria-label="simple table">
+            <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
                     <TableRow>
-                        <TableCell></TableCell>
                         <TableCell>User</TableCell>
-
-                        <TableCell></TableCell>
-
-                        <TableCell></TableCell>
-                        <TableCell></TableCell>
                         <TableCell>Tokens</TableCell>
-
-                        <TableCell></TableCell>
-                        <TableCell></TableCell>
                         <TableCell>Price</TableCell>
-
-                        <TableCell></TableCell>
-                        <TableCell></TableCell>
-                        <TableCell sx={{ padding: 0 }}>Time Trade</TableCell>
-
-                        <TableCell></TableCell>
-                        <TableCell></TableCell>
-                        <TableCell></TableCell>
-                        <TableCell></TableCell>
+                        <TableCell>Time Trade</TableCell>
                         <TableCell>Size</TableCell>
-                        <TableCell></TableCell>
-                        <TableCell></TableCell>
-                        <TableCell></TableCell>
                         <TableCell>Buy/Sell</TableCell>
-
-                        <TableCell></TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
                     {rows.map(row => {
                         return (
                             <TableRow
-                                key={row.user}
+                                key={row.uuid}
                                 sx={{
                                     '&:last-child td, &:last-child th': {
                                         border: 0,
@@ -59,13 +37,13 @@ const BasicTable: FC<PropsToken> = (props: PropsToken) => {
                                 }}
                             >
                                 <TableCell component="th" scope="row">
-                                    key={row.user}
+                                    {row.uuid}
                                 </TableCell>
-                                <TableCell>{row.token}</TableCell>
-                                <TableCell>{row.timeTrade}</TableCell>
+                                <TableCell>{row.symbol_id}</TableCell>
                                 <TableCell>{row.price}</TableCell>
+                                <TableCell>{row.time_exchange}</TableCell>
                                 <TableCell>{row.size}</TableCell>
-                                <TableCell>{row.buysell}</TableCell>
+                                <TableCell>{row.taker_side}</TableCell>
                             </TableRow>
                         )
                     })}
