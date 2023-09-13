@@ -17,6 +17,8 @@ export const Title = styled.h1`
     margin-bottom: 2rem;
     font-weight: 900;
     color: #f1c933;
+    text-align: center;
+    margin: 0.5rem;
 `
 
 export const SubTitle = styled.h2`
@@ -24,4 +26,6 @@ export const SubTitle = styled.h2`
     font-size: 1.5rem;
     margin-bottom: 2rem;
     color: #2091eb;
+    text-align: center;
+    margin: 0.5rem;
 `

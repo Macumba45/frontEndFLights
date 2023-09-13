@@ -10,7 +10,7 @@ import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
 import { PropsToken } from './type'
 import { Alert, Button, Modal } from '@mui/material'
-import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
+import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn'
 import EqualizerIcon from '@mui/icons-material/Equalizer'
@@ -179,7 +179,7 @@ const BasicTable: FC<PropsToken> = (props: PropsToken) => {
             </Modal>
 
             <TableContainer component={Paper}>
-                <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                <Table aria-label="simple table">
                     <TableHead>
                         <TableRow>
                             <TableCell>Coin Name</TableCell>

@@ -11,8 +11,8 @@ export const MainContainer = styled.div`
 
 export const ButtonContainer = styled.div`
     display: flex;
-    flex-direction: row;
     justify-content: center;
     align-items: center;
     margin-top: 2rem;
+    flex-wrap: wrap;
 `

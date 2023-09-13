@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import TextField from '@mui/material/TextField'
 import { Binance } from '@/app/types'
 import { MainContainer } from './styles'
@@ -6,6 +6,7 @@ import BasicTable from '../TableFlights'
 
 const TableFilterComponent: FC<{ tokenData: Binance[] }> = ({ tokenData }) => {
     const [searchText, setSearchText] = useState('')
+    const [width, setWidth] = useState(0)
     const filteredTokens = tokenData.filter(token =>
         token.name!.toLowerCase().includes(searchText.toLowerCase())
     )
@@ -13,6 +14,16 @@ const TableFilterComponent: FC<{ tokenData: Binance[] }> = ({ tokenData }) => {
     const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSearchText(event.target.value)
     }
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            if (window.innerWidth < 600) {
+                setWidth(300)
+            } else {
+                setWidth(600)
+            }
+        }
+    }, [])
 
     return (
         <>
@@ -27,7 +38,7 @@ const TableFilterComponent: FC<{ tokenData: Binance[] }> = ({ tokenData }) => {
                     sx={{ width: '100%' }}
                 />
             </MainContainer>
-            <div>
+            <div style={{ overflow: 'scroll', width: '100%' }}>
                 <BasicTable tokenData={filteredTokens} />
             </div>
         </>
