@@ -1,5 +1,4 @@
-import { Daum } from '@/app/types'
-
-export type PropsFlight = {
-    flightData: Daum[]
+import { TokenData } from '@/app/types'
+export type PropsToken = {
+    tokenData: TokenData[]
 }

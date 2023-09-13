@@ -83,3 +83,12 @@ export interface Live {
     speed_vertical: number
     is_ground: boolean
 }
+
+export type TokenData = {
+    user: string
+    token: string
+    price: number
+    timeTrade: string
+    size: number
+    buysell: string
+}

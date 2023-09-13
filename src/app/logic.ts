@@ -1,28 +1,33 @@
 import axios from 'axios'
 import { useState } from 'react'
-import { Airline, FlightData } from './types'
+import { Airline, FlightData, TokenData } from './types'
 
 export const logic = () => {
-    const API_URL = 'https://backend-flights.vercel.app/flights'
+    const API_URL = 'https://backend-flights.vercel.app/trades'
 
-    const [data, setData] = useState<FlightData>({
-        pagination: {
-            limit: 0,
-        },
-        data: [{}],
-    } as FlightData)
+    const [data, setData] = useState<TokenData[]>([])
 
-    const getRealTimeFlightData = async (): Promise<FlightData> => {
-        let flightData: FlightData = {} as FlightData
+    const getRealTimeFlightData = async (): Promise<void> => {
         try {
             const response = await axios.get(API_URL)
-            flightData = response.data
-            setData(flightData)
+            const rawData = response.data // Datos recibidos de la API
+
+            // Realizar la conversión de los datos a TokenData si es necesario
+            const tokenDataArray: TokenData[] = rawData.map((item: any) => ({
+                user: item.user,
+                token: item.token,
+                price: item.price,
+                timeTrade: item.timeTrade,
+                size: item.size,
+                buysell: item.buysell,
+            }))
+
+            setData(tokenDataArray)
         } catch (error) {
-            console.log
+            console.error(error)
         }
-        return flightData
     }
+
     return {
         getRealTimeFlightData,
         data,
