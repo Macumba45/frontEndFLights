@@ -18,5 +18,4 @@ const ButtonComponent: FC<Props> = ({ onClick, title }) => {
         </Button>
     )
 }
-
 export default memo(ButtonComponent)
